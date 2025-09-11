@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>  
+        .hidden {display:none} 
+    </style>
+
+</head>
+<body>
+
+    <h1>Gerenciador de Produtos</h1>
+
+    <div id="tabela">
+        <button onclick="cadastrar()">Cadastrar</button>
+
+        <table border="1">
+            <tr>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Valor total</th>
+                <th>Acoes</th>
+            </tr>
+            <tbody id="corpo"></tbody>
+
+        </table>
+
+    </div>
+
+
+
+    <div id="telaCadastro" class="hidden">
+
+      
+     
+
+
+        <h1>Cadastro do Produto</h1>
+
+        Nome: <input id ="nome" type="text">
+        <br><br>
+        Preco: <input id ="preco" type="number">
+        <br><br>
+        Quantidade: <input id ="qtd" type="number">
+        <br><br>
+
+        <button onclick="salvar()">Salvar</button>
+        <button onclick="cancela()">Cancela</button>
+      
+
+   
+    </div>
+    
+
+    <script> 
+    let nomes=[]
+    let precos=[]
+    let quantidades=[]
+    let valorTotal=[]
+
+
+    function salvar(){
+
+        let nome = document.getElementById("nome")
+        let preco = document.getElementById("preco")
+        let quantidade = document.getElementById("qtd")
+
+        nomes.push(nome.value)
+        precos.push(parseFloat(preco.value))
+        quantidades.push(parseInt(quantidade.value))
+      
+
+        let total =parseFloat(preco.value) *  parseInt(quantidade.value)
+        valorTotal.push(total)
+
+
+        alert("produto cadastrado com sucesso")
+
+        document.getElementById("tabela").classList.remove("hidden")
+        document.getElementById("telaCadastro").classList.add("hidden")
+
+        mostrarTabela()
+
+
+
+    }
+
+
+    function mostrarTabela(){
+        let corpo = document.getElementById("corpo")
+        corpo.innerHTML=""
+        for (let i = 0; i < nomes.length; i++){
+            let linha = document.createElement("tr")
+            linha.innerHTML = `
+            
+                <td>${nomes[i]}</td>
+                <td>${precos[i]}</td>
+                <td>${quantidades[i]}</td>
+                <td>${valorTotal[i]}</td>
+                <td> <button onclick="excluir(${i})">excluir</button></td>
+
+            
+            `
+            corpo.appendChild(linha)
+
+        }
+
+
+    }
+
+    function excluir(i){
+nomes.splice(i,1)
+precos.splice(i,1)
+quantidades.splice(i,1)
+valorTotal.splice(i,1)
+
+mostrarTabela()
+
+
+    }
+
+    function cadastrar() {
+
+           
+            document.getElementById("tabela").classList.add("hidden")
+            document.getElementById("telaCadastro").classList.remove("hidden")
+
+        }
+
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>
