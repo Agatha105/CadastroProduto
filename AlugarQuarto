@@ -1,0 +1,27 @@
+const prompt = require("prompt-sync")();
+
+let alugueis = [];
+
+
+let num = prompt("Digite quantos quartos vc quer alugar")
+
+for (let i = 0; i <num; i++) {
+let quarto = prompt("Digite o numero do quarto: ")
+let nome = prompt("Digite o nome: ")
+let email =prompt("Digite o email: ")
+
+let aluguel = {
+    quarto: quarto,
+    nome: nome,
+    email: email
+
+}
+
+alugueis.push(aluguel)
+
+
+
+}
+for (let i = 0; i < alugueis.length; i++) {
+    console.log(`${alugueis[i].quarto}: ${alugueis[i].nome}: ${alugueis[i].email}`);
+}
